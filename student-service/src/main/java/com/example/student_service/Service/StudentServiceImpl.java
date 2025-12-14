@@ -46,6 +46,14 @@ public class StudentServiceImpl implements StudentService{
                 .collect(Collectors.toList());
     }
 
+    /*@Override
+    public List<StudentDTO> getAll() {
+        return repo.findAll()
+                .stream()
+                .map(s -> mapper.map(s, StudentDTO.class))
+                .toList();
+    }*/
+
     @Override
     public StudentDTO updateStudent(Long id, StudentDTO studentDTO) {
         Student existingStudent = studentRepository.findById(id).get();
