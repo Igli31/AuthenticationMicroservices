@@ -26,6 +26,12 @@ public class StudentServiceImpl implements StudentService{
         return modelMapper.map(createdStudent, StudentDTO.class);
     }
 
+    /*@Override
+    public StudentDTO create(StudentDTO dto) {
+        Student student = mapper.map(dto, Student.class);
+        return mapper.map(repo.save(student), StudentDTO.class);
+    }*/
+
     @Override
     public StudentDTO getStudentById(Long studentId) {
         Student student = studentRepository.findById(studentId).get();
