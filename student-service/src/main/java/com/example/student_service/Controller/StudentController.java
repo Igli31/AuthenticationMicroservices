@@ -1,6 +1,8 @@
 package com.example.student_service.Controller;
 
+import com.example.student_service.DTO.ClassRoomDTO;
 import com.example.student_service.DTO.StudentDTO;
+import com.example.student_service.Service.ClassServiceClient;
 import com.example.student_service.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,9 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private ClassServiceClient classServiceClient;
 
     @PostMapping("/create")
     ResponseEntity<StudentDTO>createStudent(@RequestBody StudentDTO studentDTO){
@@ -44,5 +49,13 @@ public class StudentController {
     ResponseEntity<Void>deleteStudentById(@PathVariable Long studentId){
         studentService.deleteStudentById(studentId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/class/{classId}")
+    public ResponseEntity<ClassRoomDTO> getClassById(
+            @PathVariable Long classId) {
+
+        ClassRoomDTO classRoom = classServiceClient.fetchClassById(classId);
+        return ResponseEntity.ok(classRoom);
     }
 }
