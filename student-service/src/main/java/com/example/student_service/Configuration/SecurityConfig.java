@@ -27,10 +27,14 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(
                         CookieCsrfTokenRepository.withHttpOnlyFalse())
+                        .ignoringRequestMatchers("/api/users/create",
+                                "/api/users/register",
+                                "/api/roles/create")
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/users/create",
+                                "/api/users/register",
                                 "/api/roles/create"
                         ).permitAll()
                         .anyRequest().authenticated())
