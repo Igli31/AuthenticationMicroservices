@@ -29,6 +29,10 @@ public class SecurityConfig {
                         CookieCsrfTokenRepository.withHttpOnlyFalse())
                 )
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/api/users/create",
+                                "/api/roles/create"
+                        ).permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults());
 
