@@ -25,11 +25,11 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         System.out.println("Security Config Loaded");
         http
-                .csrf(csrf -> csrf
-                        .csrfTokenRepository(
+                .csrf(csrf -> csrf.disable()
+                        /*.csrfTokenRepository(
                         CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .ignoringRequestMatchers("/api/users/**",
-                                "/api/roles/**")
+                                "/api/roles/**")*/
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
@@ -38,6 +38,7 @@ public class SecurityConfig {
                         ).permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults());
+                /*.authorizeHttpRequests(auth ->auth.anyRequest().permitAll());*/
 
         return http.build();
     }
