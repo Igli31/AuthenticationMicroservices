@@ -23,19 +23,18 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+        System.out.println("Security Config Loaded");
         http
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(
                         CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        .ignoringRequestMatchers("/api/users/create",
-                                "/api/users/register",
-                                "/api/roles/create")
+                        .ignoringRequestMatchers("/api/users/**",
+                                "/api/roles/**")
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/api/users/create",
-                                "/api/users/register",
-                                "/api/roles/create"
+                                "/api/users/**",
+                                "/api/roles/**"
                         ).permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults());
